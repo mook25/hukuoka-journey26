@@ -7,6 +7,9 @@
 <meta property="og:description" content="2026년 3월 3일(화) - 3월 6일(금) | 인천 → 후쿠오카 → 벳푸 → 하카타 → 인천">
 <meta property="og:image" content="https://i.ibb.co/v6xdxW4W/image.png">
 <meta property="og:type" content="website">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
 <title>일본 여행 안내서 - 후쿠오카/벳푸 3박 4일</title>
 <style>
   @page { size: A4; margin: 15mm 18mm; }
@@ -243,6 +246,79 @@
   /* Links */
   a { color: #1a56db; word-break: break-all; }
 
+  /* Password Overlay */
+  .pw-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 9999;
+    background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .pw-overlay.hidden { display: none; }
+  .pw-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    max-width: 340px;
+    width: 90%;
+  }
+  .pw-box h2 {
+    background: none;
+    color: #1a56db;
+    font-size: 18px;
+    padding: 0;
+    margin: 0 0 6px;
+    border-radius: 0;
+  }
+  .pw-box .pw-sub {
+    font-size: 12.5px;
+    color: #6b7280;
+    margin-bottom: 20px;
+  }
+  .pw-box input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    text-align: center;
+    letter-spacing: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .pw-box input:focus { border-color: #1a56db; }
+  .pw-box input.error { border-color: #ef4444; animation: shake 0.3s; }
+  .pw-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    background: #1a56db;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pw-box button:active { background: #1e40af; }
+  .pw-error {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 8px;
+    min-height: 18px;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
   /* Font Size Control */
   .font-control {
     position: fixed;
@@ -303,6 +379,17 @@
 </style>
 </head>
 <body>
+
+<!-- Password Overlay -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <h2>후쿠오카 / 벳푸 여행안내서</h2>
+    <div class="pw-sub">비밀번호를 입력해 주세요</div>
+    <input type="password" id="pwInput" inputmode="numeric" maxlength="10" placeholder="비밀번호" autocomplete="off">
+    <button onclick="checkPassword()">확인</button>
+    <div class="pw-error" id="pwError"></div>
+  </div>
+</div>
 
 <div class="fixed-top" id="fixedTop">
   <div class="header">
@@ -1015,6 +1102,37 @@
 </div>
 
 <script>
+// Password check
+var PW_HASH = 'e9e639cdef5020cc761cd12ee120a6a6506ec7abcae50ad500694f82c97e0732';
+
+(function() {
+  if (sessionStorage.getItem('travelAuth') === 'ok') {
+    document.getElementById('pwOverlay').classList.add('hidden');
+  }
+  document.getElementById('pwInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+})();
+
+async function hashSHA256(str) {
+  var buf = new TextEncoder().encode(str);
+  var hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+}
+
+async function checkPassword() {
+  var input = document.getElementById('pwInput');
+  var hashed = await hashSHA256(input.value);
+  if (hashed === PW_HASH) {
+    sessionStorage.setItem('travelAuth', 'ok');
+    document.getElementById('pwOverlay').classList.add('hidden');
+  } else {
+    input.classList.add('error');
+    document.getElementById('pwError').textContent = '비밀번호가 틀렸습니다';
+    setTimeout(function() { input.classList.remove('error'); }, 300);
+  }
+}
+
 var zoomLevel = 0;
 var zoomSteps = [80, 90, 100, 115, 130, 150];
 var defaultZoomIdx = 2;
