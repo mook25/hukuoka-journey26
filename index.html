@@ -3,57 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="후쿠오카 / 벳푸 3박 4일 여행안내서">
+<meta property="og:description" content="2026년 3월 3일(화) - 3월 6일(금) | 인천 → 후쿠오카 → 벳푸 → 하카타 → 인천">
+<meta property="og:image" content="https://i.ibb.co/v6xdxW4W/image.png">
+<meta property="og:type" content="website">
 <title>일본 여행 안내서 - 후쿠오카/벳푸 3박 4일</title>
 <style>
-  @page {
-    size: A4;
-    margin: 15mm 18mm;
-  }
+  @page { size: A4; margin: 15mm 18mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.7;
     color: #1a1a1a;
-    padding: 20px;
-    max-width: 210mm;
+    max-width: 640px;
+    margin: 0 auto;
+    background: #f5f5f5;
+  }
+
+  /* Fixed Top Area */
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    max-width: 640px;
     margin: 0 auto;
   }
-  h1 {
-    font-size: 22px;
+
+  /* Header */
+  .header {
+    background: #1a56db;
+    color: #fff;
     text-align: center;
-    padding: 18px 0 8px;
-    border-bottom: 3px solid #1a56db;
-    margin-bottom: 6px;
-    color: #1a56db;
+    padding: 18px 16px 12px;
   }
-  .subtitle {
-    text-align: center;
+  .header h1 { font-size: 20px; margin-bottom: 4px; }
+  .header .subtitle { font-size: 13px; color: #bfdbfe; }
+
+  /* Tab Navigation */
+  .tab-nav {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    border-bottom: 2px solid #e5e7eb;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 12px 16px;
     font-size: 13px;
-    color: #555;
-    margin-bottom: 20px;
+    font-weight: 600;
+    color: #6b7280;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
   }
+  .tab-btn.active {
+    color: #1a56db;
+    border-bottom-color: #1a56db;
+    background: #eff6ff;
+  }
+  .tab-btn .tab-date { display: block; font-size: 11px; font-weight: 400; color: #9ca3af; }
+  .tab-btn.active .tab-date { color: #60a5fa; }
+
+  /* Tab Content */
+  .tab-content { display: none; padding: 16px; background: #fff; min-height: 60vh; }
+  .tab-content.active { display: block; }
+
+  /* Sub-tab Navigation */
+  .sub-tab-nav {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e7eb;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap;
+  }
+  .sub-tab-btn {
+    flex: 0 0 auto;
+    padding: 7px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #4b5563;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .sub-tab-btn.active {
+    color: #fff;
+    background: #1a56db;
+    border-color: #1a56db;
+  }
+  .sub-tab-content { display: none; }
+  .sub-tab-content.active { display: block; }
+
+  /* Typography */
   h2 {
     font-size: 16px;
     color: #fff;
     background: #1a56db;
-    padding: 7px 14px;
+    padding: 8px 14px;
     border-radius: 6px;
-    margin: 22px 0 10px;
-    page-break-after: avoid;
+    margin: 18px 0 10px;
   }
+  h2:first-child { margin-top: 0; }
   h3 {
     font-size: 14px;
     color: #1a56db;
     border-left: 4px solid #1a56db;
     padding-left: 10px;
-    margin: 14px 0 8px;
-    page-break-after: avoid;
+    margin: 16px 0 8px;
   }
   p, li { margin-bottom: 4px; }
   ul, ol { padding-left: 22px; margin-bottom: 10px; }
   li { margin-bottom: 3px; }
   strong { color: #c0392b; }
+
+  /* Table */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -74,6 +152,8 @@
     vertical-align: top;
   }
   tr:nth-child(even) td { background: #f9fafb; }
+
+  /* Callout */
   .callout {
     background: #fef3c7;
     border-left: 4px solid #f59e0b;
@@ -90,52 +170,19 @@
     border-radius: 0 6px 6px 0;
     font-size: 12.5px;
   }
+
+  /* Map */
   .map-link {
     display: inline-block;
     background: #1a56db;
     color: #fff !important;
     text-decoration: none;
-    padding: 6px 14px;
+    padding: 8px 18px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 13px;
     margin: 6px 0 10px;
   }
   .map-link:hover { background: #1e40af; }
-  .timeline-day {
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin: 10px 0;
-  }
-  .timeline-day h3 {
-    border-left: 4px solid #16a34a;
-    color: #16a34a;
-  }
-  .section-overview {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 14px 18px;
-    margin-bottom: 16px;
-  }
-  hr {
-    border: none;
-    border-top: 1px solid #e5e7eb;
-    margin: 18px 0;
-  }
-  .step-num {
-    display: inline-block;
-    background: #1a56db;
-    color: #fff;
-    width: 22px;
-    height: 22px;
-    text-align: center;
-    border-radius: 50%;
-    font-size: 12px;
-    line-height: 22px;
-    margin-right: 6px;
-  }
   .map-section {
     background: #f0f9ff;
     border: 1px dashed #1a56db;
@@ -144,22 +191,142 @@
     margin: 8px 0 14px;
     text-align: center;
   }
+
+  /* Step number */
+  .step-num {
+    display: inline-block;
+    background: #1a56db;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 24px;
+    margin-right: 6px;
+  }
+
+  /* Timeline */
+  .timeline-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+    align-items: baseline;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-time {
+    flex: 0 0 70px;
+    font-weight: 700;
+    color: #1a56db;
+    font-size: 13px;
+  }
+  .timeline-desc { flex: 1; font-size: 13px; }
+
+  /* Emergency */
   .emergency {
     background: #fef2f2;
     border: 1px solid #fecaca;
     border-radius: 8px;
     padding: 12px 14px;
   }
+
+  /* Overview card */
+  .overview-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+  }
+
+  /* Links */
   a { color: #1a56db; word-break: break-all; }
-  .page-break { page-break-before: always; }
+
+  /* Font Size Control */
+  .font-control {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 200;
+    display: flex;
+    gap: 4px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    padding: 4px;
+  }
+  .font-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #f3f4f6;
+    color: #1a56db;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .font-btn:active { background: #1a56db; color: #fff; }
+  .font-size-label {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 600;
+    min-width: 32px;
+    justify-content: center;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    padding: 16px;
+    background: #f5f5f5;
+  }
+  .footer a { color: #999; }
+
+  /* Print: show all tabs */
+  @media print {
+    .tab-nav, .sub-tab-nav { display: none; }
+    .tab-content, .sub-tab-content { display: block !important; page-break-inside: avoid; }
+    body { background: #fff; }
+    .header { background: #1a56db; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
 </style>
 </head>
 <body>
 
-<h1>후쿠오카 / 벳푸 3박 4일</h1>
-<p class="subtitle">2026년 3월 3일(화) - 3월 6일(금)</p>
+<div class="fixed-top" id="fixedTop">
+  <div class="header">
+    <h1>후쿠오카 / 벳푸 3박 4일</h1>
+    <div class="subtitle">2026년 3월 3일(화) - 3월 6일(금)</div>
+  </div>
 
-<div class="section-overview">
+  <!-- Tab Navigation -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('prep')">준비사항<span class="tab-date">출발 전</span></button>
+    <button class="tab-btn" onclick="showTab('day1')">1일차<span class="tab-date">3/3 화</span></button>
+    <button class="tab-btn" onclick="showTab('day2')">2일차<span class="tab-date">3/4 수</span></button>
+    <button class="tab-btn" onclick="showTab('day3')">3일차<span class="tab-date">3/5 목</span></button>
+    <button class="tab-btn" onclick="showTab('day4')">4일차<span class="tab-date">3/6 금</span></button>
+    <button class="tab-btn" onclick="showTab('info')">참고정보<span class="tab-date">지도/연락처</span></button>
+  </nav>
+</div>
+
+<div id="topSpacer"></div>
+
+<!-- ===== 준비사항 탭 ===== -->
+<div id="prep" class="tab-content active">
+
+<div class="overview-card">
   <table>
     <tr><td><strong>일정</strong></td><td>2026년 3월 3일(화) - 3월 6일(금), 3박 4일</td></tr>
     <tr><td><strong>인원</strong></td><td>성인 3명 (남성 2명, 여성 1명)</td></tr>
@@ -168,13 +335,16 @@
   </table>
 </div>
 
-<!-- ===== 1. 출발 전 준비사항 ===== -->
-<h2>1. 출발 전 준비사항</h2>
+<div class="sub-tab-nav">
+  <button class="sub-tab-btn active" onclick="showSubTab('prep','prep-entry')">입국 준비</button>
+  <button class="sub-tab-btn" onclick="showSubTab('prep','prep-checkin')">항공좌석 체크인</button>
+  <button class="sub-tab-btn" onclick="showSubTab('prep','prep-money')">현금 및 로밍</button>
+</div>
 
-<h3>비자</h3>
-<p>한국 국민은 90일 이내 관광 목적 방문 시 <strong>비자 면제</strong>. 별도 신청 불필요.</p>
+<!-- 준비사항: 입국 준비 -->
+<div id="prep-entry" class="sub-tab-content active">
 
-<h3>Visit Japan Web (비짓재팬웹) - 필수 등록 권장</h3>
+<h2>Visit Japan Web (비짓재팬웹)</h2>
 <ul>
   <li>일본 입국심사 + 세관신고를 온라인으로 미리 처리하는 서비스</li>
   <li><strong>출발 전에 반드시 3명 모두 등록</strong> (대표 1명이 동반가족 등록 가능)</li>
@@ -184,17 +354,102 @@
   <li>스마트폰에 QR코드를 저장하거나, PC에서 인쇄해 가세요</li>
 </ul>
 
-<h3>기타 준비물</h3>
+<h2>기타 준비물</h2>
 <ul>
   <li><strong>여권</strong> (유효기간 확인 필수)</li>
   <li><strong>항공권 예약 확인서</strong> (스마트폰 캡처 또는 인쇄)</li>
   <li><strong>숙소 예약 확인서</strong> 모두 인쇄 (스기노이호텔, 더블러썸 하카타)</li>
   <li><strong>고속버스 WEB승차권</strong> 2장 (가는편/오는편) - 스마트폰 화면 또는 인쇄본 필수 (예약 완료 메일로는 탑승 불가!)</li>
   <li><strong>여행자보험</strong> 가입 권장</li>
-  <li><strong>SKT 로밍</strong> (아래 로밍 안내 참조)</li>
+  <li><strong>SKT 로밍</strong> (현금 및 로밍 탭 참조)</li>
 </ul>
 
-<h3>현금 준비 (엔화 환전)</h3>
+</div>
+
+<!-- 준비사항: 항공좌석 체크인 -->
+<div id="prep-checkin" class="sub-tab-content">
+
+<h2>✈️ 온라인 체크인 (사전 좌석 배정)</h2>
+<p>공항에서 줄 서지 않고 <strong>미리 좌석을 배정</strong>받을 수 있습니다. 핸드폰이나 컴퓨터에서 가능합니다.</p>
+
+<div class="callout">
+  <strong>온라인 체크인 가능 시간 (국제선)</strong><br>
+  출발 <strong>24시간 전 ~ 1시간 전</strong>까지 가능<br><br>
+  <table>
+    <tr><th>편명</th><th>구간</th><th>출발시간</th><th>체크인 가능 시작</th></tr>
+    <tr><td><strong>TW259</strong> (가는편)</td><td>인천 → 후쿠오카</td><td>3/3(화) 10:00</td><td><strong>3/2(월) 10:00부터</strong></td></tr>
+    <tr><td><strong>TW206</strong> (오는편)</td><td>후쿠오카 → 인천</td><td>3/6(금) 17:20</td><td><strong>3/5(목) 17:20부터</strong></td></tr>
+  </table>
+</div>
+
+<h3>예약 정보</h3>
+<table>
+  <tr><th>항목</th><th>내용</th></tr>
+  <tr><td><strong>예약번호</strong></td><td><strong style="font-size:1.2em; color:#e74c3c;">BALPTX</strong></td></tr>
+  <tr><td>탑승객 1</td><td>KIM / YOUNGIL (김영일) — 티켓번호: 7222426386197</td></tr>
+  <tr><td>탑승객 2</td><td>KIM / BOMOOK (김보묵) — 티켓번호: 7222426386195</td></tr>
+  <tr><td>탑승객 3</td><td>BAK / MIHYE (박미혜) — 티켓번호: 7222426386196</td></tr>
+</table>
+
+<h3>체크인 방법 (단계별)</h3>
+
+<p><span class="step-num">1</span> <strong>티웨이항공 온라인 체크인 페이지 접속</strong></p>
+<ul>
+  <li>아래 링크를 클릭하거나, 티웨이항공 앱에서 "온라인 체크인" 메뉴를 선택하세요</li>
+  <li><a href="https://www.twayair.com/app/reservation/searchCheckinItinerary" style="font-size:1.05em;">👉 티웨이 온라인 체크인 바로가기</a></li>
+</ul>
+
+<p><span class="step-num">2</span> <strong>예약번호 + 탑승객 정보 입력</strong></p>
+<ul>
+  <li>예약번호: <strong>BALPTX</strong></li>
+  <li>영문 성(Last Name): 대표 탑승객의 영문 성 입력 (예: KIM)</li>
+</ul>
+
+<p><span class="step-num">3</span> <strong>여행편 선택</strong></p>
+<ul>
+  <li>체크인할 항공편을 선택합니다 (가는편 / 오는편)</li>
+  <li>3명 모두 한 번에 체크인할 수 있습니다</li>
+</ul>
+
+<p><span class="step-num">4</span> <strong>여권 정보 입력 (국제선 필수)</strong></p>
+<ul>
+  <li>탑승객별로 <strong>여권번호, 여권 만료일, 국적, 생년월일</strong>을 입력합니다</li>
+  <li>여권을 보면서 정확히 입력해 주세요</li>
+</ul>
+
+<p><span class="step-num">5</span> <strong>약관 동의</strong></p>
+<ul>
+  <li>3개 항목 모두 동의 체크 후 다음으로 진행</li>
+</ul>
+
+<p><span class="step-num">6</span> <strong>좌석 선택</strong></p>
+<ul>
+  <li>좌석 배치도에서 원하는 좌석을 선택합니다</li>
+  <li>3명이 나란히 앉으려면 같은 줄의 연속 좌석을 선택하세요</li>
+</ul>
+
+<p><span class="step-num">7</span> <strong>체크인 완료 → QR 탑승권 저장</strong></p>
+<ul>
+  <li>체크인이 완료되면 <strong>QR코드가 포함된 모바일 탑승권</strong>이 발급됩니다</li>
+  <li><strong>반드시 스마트폰에 캡처/저장하거나, 종이로 인쇄해 주세요!</strong></li>
+</ul>
+
+<div class="callout">
+  <strong>체크인 완료 후, 공항에서는?</strong><br><br>
+  <strong>부치는 짐(수하물)이 있는 경우:</strong><br>
+  QR 탑승권 저장 → 공항 도착 → <strong>수하물 카운터에서 짐 위탁</strong> → 출국심사 → 탑승구<br><br>
+  <strong>부치는 짐이 없는 경우:</strong><br>
+  QR 탑승권 저장 → 공항 도착 → 바로 출국심사 → 탑승구<br><br>
+  ※ 보안검색대와 탑승구에서 <strong>QR 탑승권</strong>을 보여주시면 됩니다.<br>
+  ※ 온라인 체크인을 하면 공항 체크인 카운터에서 <strong>줄을 서지 않아도</strong> 됩니다!
+</div>
+
+</div>
+
+<!-- 준비사항: 현금 및 로밍 -->
+<div id="prep-money" class="sub-tab-content">
+
+<h2>현금 준비 (엔화 환전)</h2>
 <p>비행기, 호텔, 고속버스는 모두 사전 결제 완료이지만, 아래 항목은 <strong>현금이 필요</strong>합니다.</p>
 <table>
   <tr><th>항목</th><th>예상 금액</th><th>비고</th></tr>
@@ -211,9 +466,8 @@
   해외 결제 가능한 신용/체크카드가 있으면 편리하지만, 없어도 현금만으로 충분합니다.
 </div>
 
-<h3>휴대폰 로밍 안내 (SKT baro 요금제 추천)</h3>
+<h2>휴대폰 로밍 안내 (SKT baro 요금제 추천)</h2>
 <p>일본에서 지도 검색, 번역앱, 카카오톡 등을 사용하려면 데이터 통신이 필수입니다.</p>
-
 <table>
   <tr><th>비교 항목</th><th>SKT baro 로밍 (추천)</th><th>해외 유심/eSIM</th></tr>
   <tr><td>설정</td><td><strong>없음 — 도착 즉시 자동 연결</strong></td><td>QR코드 스캔, 셀룰러 설정 변경 필요</td></tr>
@@ -222,7 +476,6 @@
   <tr><td>문제 발생 시</td><td>114 고객센터 연결 가능</td><td>직접 해결해야 함</td></tr>
   <tr><td>비용 (4일)</td><td>29,000원 (baro 3GB)</td><td>10,000~25,000원</td></tr>
 </table>
-
 <div class="callout">
   <strong>SKT baro 3GB (29,000원)를 추천합니다.</strong><br>
   별도 설정 없이 비행기 내려서 폰 켜면 바로 사용 가능하고, 기존 전화번호도 그대로 유지됩니다.<br>
@@ -232,9 +485,38 @@
   <strong>비용:</strong> 1인 29,000원 × 3명 = <strong>총 87,000원</strong>
 </div>
 
-<!-- ===== 2. 인천공항 출발 ===== -->
-<h2>2. 인천공항 출발 (3/3 화)</h2>
+</div>
 
+</div>
+
+<!-- ===== 1일차 탭 (3/3 화) ===== -->
+<div id="day1" class="tab-content">
+
+<div class="sub-tab-nav">
+  <button class="sub-tab-btn active" onclick="showSubTab('day1','day1-timeline')">타임라인</button>
+  <button class="sub-tab-btn" onclick="showSubTab('day1','day1-detail')">세부사항</button>
+</div>
+
+<!-- 1일차: 타임라인 -->
+<div id="day1-timeline" class="sub-tab-content active">
+
+<h2>1일차 타임라인</h2>
+<div class="timeline-item"><span class="timeline-time">07:00</span><span class="timeline-desc">인천공항 T1 도착, F/G카운터 체크인</span></div>
+<div class="timeline-item"><span class="timeline-time">10:00</span><span class="timeline-desc">인천 출발 (TW259)</span></div>
+<div class="timeline-item"><span class="timeline-time">11:30</span><span class="timeline-desc">후쿠오카 도착, 입국심사/세관</span></div>
+<div class="timeline-item"><span class="timeline-time">12:20경</span><span class="timeline-desc">국제선 1층 밖, <strong>2번 승강장</strong>에서 대기</span></div>
+<div class="timeline-item"><span class="timeline-time">12:42</span><span class="timeline-desc">벳푸행 고속버스 출발</span></div>
+<div class="timeline-item"><span class="timeline-time">14:30경</span><span class="timeline-desc">벳푸 기타하마 도착</span></div>
+<div class="timeline-item"><span class="timeline-time">14:35경</span><span class="timeline-desc">스기노이 호텔 안내소까지 도보 이동 (5분)</span></div>
+<div class="timeline-item"><span class="timeline-time">15:00</span><span class="timeline-desc">셔틀버스 탑승</span></div>
+<div class="timeline-item"><span class="timeline-time">15:10</span><span class="timeline-desc"><strong>스기노이 호텔 도착, 체크인</strong></span></div>
+
+</div>
+
+<!-- 1일차: 세부사항 -->
+<div id="day1-detail" class="sub-tab-content">
+
+<h2>인천공항 출발</h2>
 <table>
   <tr><th>항목</th><th>내용</th></tr>
   <tr><td>출발 시간</td><td>10:00</td></tr>
@@ -246,15 +528,12 @@
   <tr><td>수하물</td><td>15kg</td></tr>
   <tr><td>좌석</td><td>일반석, M클래스</td></tr>
 </table>
-
 <div class="callout">
   첫 해외여행이시니 <strong>3시간 전(07:00)</strong> 도착을 강력 권장합니다.<br>
   체크인 → 출국심사 → 면세구역 → 탑승구까지 여유 있게 이동하세요.
 </div>
 
-<!-- ===== 3. 후쿠오카 공항 → 벳푸행 버스 ===== -->
-<h2>3. 후쿠오카 공항 도착 후 → 벳푸행 버스 탑승</h2>
-
+<h2>후쿠오카 공항 도착 → 벳푸행 버스</h2>
 <p>비행기는 <strong>11:30 도착</strong>, 버스는 <strong>12:42 출발</strong>이므로 약 1시간 12분의 여유가 있습니다.</p>
 
 <h3>단계별 안내</h3>
@@ -294,11 +573,9 @@
   <tr><td>WEB승차권 No</td><td>113079399</td></tr>
 </table>
 
-<!-- ===== 4. 벳푸 → 스기노이 호텔 ===== -->
-<h2>4. 벳푸 도착 후 → 스기노이 호텔 이동</h2>
+<h2>벳푸 도착 → 스기노이 호텔</h2>
 
-<h3>벳푸 기타하마 → 벳푸역 서쪽 출구 스기노이 호텔 안내소 (도보 약 5분)</h3>
-
+<h3>벳푸 기타하마 → 스기노이 호텔 안내소 (도보 약 5분)</h3>
 <div class="map-section">
   <strong>구글맵: 벳푸 기타하마 → 스기노이 호텔 안내소 (셔틀버스 탑승장)</strong><br>
   <a class="map-link" href="https://www.google.com/maps/dir/%EB%B2%B3%ED%91%B8%ED%82%A4%ED%83%80%ED%95%98%EB%A7%88+%EC%9D%BC%EB%B3%B8+%E3%80%92874-0920+Oita,+Beppu,+Kitahama,+2-ch%C5%8Dme%E2%88%9213/%EC%8A%A4%EA%B8%B0%EB%85%B8%EC%9D%B4+%ED%98%B8%ED%85%94+%EC%95%88%EB%82%B4%EC%86%8C,+%EC%9D%BC%EB%B3%B8+%E3%80%92874-0935+Oita,+Beppu,+Ekimaecho,+12%E2%88%9213+B-Passage+%E5%86%85/@33.2802065,131.5003367,21z/data=!4m14!4m13!1m5!1m1!1s0x3546a6dc7dea5d3d:0x5bca81d13452cd6d!2m2!1d131.5065133!2d33.2797258!1m5!1m1!1s0x3546a70580a58b67:0x12e5a1dffd521956!2m2!1d131.5003714!2d33.2801461!3e2?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank">지도 열기</a>
@@ -317,7 +594,7 @@
   <tr><td>운행</td><td>연중무휴, 약 20-40분 간격</td></tr>
 </table>
 
-<h3>3/3(화) 도착일 셔틀버스 시간표 (벳푸역 → 호텔, 평일 기준)</h3>
+<h3>도착일 셔틀버스 시간표 (벳푸역 → 호텔)</h3>
 <p>고속버스가 벳푸 기타하마에 약 14:30-15:00경 도착 예상이므로:</p>
 <ul>
   <li>안내소까지 도보 5분 이동</li>
@@ -339,8 +616,95 @@
   <tr><td>호텔 이메일</td><td>inbound-fit@suginoi-hotel.com</td></tr>
 </table>
 
-<!-- ===== 5. 체크아웃 날 ===== -->
-<h2>5. 체크아웃 날 (3/5 목) - 스기노이 호텔 → 벳푸 버스</h2>
+</div>
+
+</div>
+
+<!-- ===== 2일차 탭 (3/4 수) ===== -->
+<div id="day2" class="tab-content">
+
+<div class="sub-tab-nav">
+  <button class="sub-tab-btn active" onclick="showSubTab('day2','day2-timeline')">타임라인</button>
+  <button class="sub-tab-btn" onclick="showSubTab('day2','day2-detail')">세부사항</button>
+</div>
+
+<!-- 2일차: 타임라인 -->
+<div id="day2-timeline" class="sub-tab-content active">
+
+<h2>2일차 타임라인</h2>
+<div class="callout-blue">
+  오늘은 이동 없이 <strong>스기노이 호텔에서 온천과 시설을 마음껏 즐기는 날</strong>입니다.<br>
+  조식과 석식 모두 포함되어 있으니 편하게 보내세요.
+</div>
+<div class="timeline-item"><span class="timeline-time">07:00~09:00</span><span class="timeline-desc"><strong>조식</strong> — TERRACE &amp; DINING SORA 뷔페</span></div>
+<div class="timeline-item"><span class="timeline-time">오전</span><span class="timeline-desc">호텔 시설 자유 이용 (소라유 온천, 타나유 노천탕 등)</span></div>
+<div class="timeline-item"><span class="timeline-time">점심</span><span class="timeline-desc">자유 식사 (호텔 내 식당 또는 셔틀버스로 벳푸 시내)</span></div>
+<div class="timeline-item"><span class="timeline-time">오후</span><span class="timeline-desc">호텔 시설 자유 이용 (아쿠아 가든, 산책 등)</span></div>
+<div class="timeline-item"><span class="timeline-time">저녁</span><span class="timeline-desc"><strong>석식</strong> — TERRACE &amp; DINING SORA 뷔페 (올인클루시브)</span></div>
+
+</div>
+
+<!-- 2일차: 세부사항 -->
+<div id="day2-detail" class="sub-tab-content">
+
+<h2>벳푸 자유일 - 온천 즐기기</h2>
+
+<div class="callout-blue">
+  오늘은 이동 없이 스기노이 호텔에서 온천과 시설을 마음껏 즐기는 날입니다.<br>
+  <strong>조식과 석식 모두 포함</strong>되어 있으니 식사 걱정 없이 편하게 보내세요.
+</div>
+
+<h3>호텔 시설 이용 안내</h3>
+<ul>
+  <li><strong>소라유 온천</strong> — 소라칸 최상층, 투숙객 전용 온천</li>
+  <li><strong>타나유 파노라마 노천탕</strong> — 오션뷰 대형 노천탕, 무료</li>
+  <li><strong>아쿠아 가든</strong> — 야외 온천 테마파크, 무료</li>
+</ul>
+
+<h3>식사 안내</h3>
+<table>
+  <tr><th>식사</th><th>장소</th><th>비고</th></tr>
+  <tr><td>조식</td><td>TERRACE &amp; DINING SORA</td><td>뷔페, 숙박 포함</td></tr>
+  <tr><td>점심</td><td>자유</td><td><strong>별도 비용</strong> — 호텔 내 식당 또는 외부</td></tr>
+  <tr><td>석식</td><td>TERRACE &amp; DINING SORA</td><td>뷔페, 숙박 포함 (올인클루시브)</td></tr>
+</table>
+
+<div class="callout">
+  점심은 포함되어 있지 않으니 호텔 내 식당을 이용하거나,<br>
+  셔틀버스로 벳푸 시내에 나가서 드셔도 됩니다.
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== 3일차 탭 (3/5 목) ===== -->
+<div id="day3" class="tab-content">
+
+<div class="sub-tab-nav">
+  <button class="sub-tab-btn active" onclick="showSubTab('day3','day3-timeline')">타임라인</button>
+  <button class="sub-tab-btn" onclick="showSubTab('day3','day3-detail')">세부사항</button>
+</div>
+
+<!-- 3일차: 타임라인 -->
+<div id="day3-timeline" class="sub-tab-content active">
+
+<h2>3일차 타임라인</h2>
+<div class="timeline-item"><span class="timeline-time">09:30경</span><span class="timeline-desc">스기노이 호텔 체크아웃</span></div>
+<div class="timeline-item"><span class="timeline-time">10:00</span><span class="timeline-desc">호텔 셔틀버스 탑승</span></div>
+<div class="timeline-item"><span class="timeline-time">10:10</span><span class="timeline-desc">벳푸역 도착, 기타하마까지 도보 5분</span></div>
+<div class="timeline-item"><span class="timeline-time">10:15</span><span class="timeline-desc">벳푸 기타하마 도착, 버스 대기 (약 40분 여유)</span></div>
+<div class="timeline-item"><span class="timeline-time">11:00</span><span class="timeline-desc"><strong>하카타행 고속버스 출발</strong></span></div>
+<div class="timeline-item"><span class="timeline-time">13:30경</span><span class="timeline-desc">하카타 버스터미널 도착</span></div>
+<div class="timeline-item"><span class="timeline-time">13:40경</span><span class="timeline-desc">호텔까지 도보 이동 (7-10분), 프론트에 짐 맡기기</span></div>
+<div class="timeline-item"><span class="timeline-time">15:00</span><span class="timeline-desc"><strong>더 블러썸 하카타 체크인</strong></span></div>
+
+</div>
+
+<!-- 3일차: 세부사항 -->
+<div id="day3-detail" class="sub-tab-content">
+
+<h2>스기노이 호텔 체크아웃 → 하카타 이동</h2>
 
 <table>
   <tr><th>항목</th><th>시간</th></tr>
@@ -375,8 +739,7 @@
   <tr><td>WEB승차권 No</td><td>113079402</td></tr>
 </table>
 
-<!-- ===== 6. 하카타 호텔 ===== -->
-<h2>6. 하카타 도착 → 더 블러썸 하카타 프리미어 호텔</h2>
+<h2>하카타 도착 → 더 블러썸 하카타 프리미어</h2>
 
 <p>하카타 버스터미널에 약 13:30경 도착 예상입니다.</p>
 
@@ -411,8 +774,8 @@
   <tr><td>조식</td><td>별도 (성인 JPY 2,750 / 어린이 JPY 1,760)</td></tr>
 </table>
 
-<h3>숙박세 안내 (후쿠오카현 + 후쿠오카시 조례)</h3>
-<p>후쿠오카시는 현(県)과 시(市)가 동시에 숙박세를 부과합니다. 숙박비에 포함되어 있지 않으며, <strong>체크인 시 현장에서 별도 납부</strong>합니다.</p>
+<h3>숙박세 안내</h3>
+<p>후쿠오카시는 현(県)과 시(市)가 동시에 숙박세를 부과합니다. <strong>체크인 시 현장에서 별도 납부</strong>합니다.</p>
 <table>
   <tr><th>1인 1박 숙박요금</th><th>숙박세</th><th>내역</th></tr>
   <tr><td>20,000엔 미만</td><td><strong>200엔</strong></td><td>현세 50엔 + 시세 150엔</td></tr>
@@ -423,27 +786,143 @@
   현금 또는 카드로 납부 가능합니다.
 </div>
 
-<!-- ===== 7. 마지막날 ===== -->
-<h2>7. 마지막날 (3/6 금) - 짐 보관 &amp; 공항 이동</h2>
+</div>
 
-<h3>짐 보관</h3>
+</div>
+
+<!-- ===== 4일차 탭 (3/6 금) ===== -->
+<div id="day4" class="tab-content">
+
+<div class="sub-tab-nav">
+  <button class="sub-tab-btn active" onclick="showSubTab('day4','day4-timeline')">타임라인</button>
+  <button class="sub-tab-btn" onclick="showSubTab('day4','day4-detail')">세부사항</button>
+</div>
+
+<!-- 4일차: 타임라인 -->
+<div id="day4-timeline" class="sub-tab-content active">
+
+<h2>4일차 타임라인</h2>
+<div class="timeline-item"><span class="timeline-time">08:00</span><span class="timeline-desc">아침식사 — 키스이마루 (하카타역 지하 1번가, 명란젓 무한리필)</span></div>
+<div class="timeline-item"><span class="timeline-time">09:00</span><span class="timeline-desc">호텔로 돌아와서 짐 정리, 체크아웃 준비</span></div>
+<div class="timeline-item"><span class="timeline-time">11:00</span><span class="timeline-desc">체크아웃, 프론트에 짐 보관</span></div>
+<div class="timeline-item"><span class="timeline-time">11:05</span><span class="timeline-desc">호텔 출발 → <strong>쿠시다 신사</strong>까지 도보 10분</span></div>
+<div class="timeline-item"><span class="timeline-time">11:15</span><span class="timeline-desc">쿠시다 신사 관람 (야마카사 장식 수레 구경)</span></div>
+<div class="timeline-item"><span class="timeline-time">11:40</span><span class="timeline-desc"><strong>캐널시티 하카타</strong> 도착 (도보 5분)</span></div>
+<div class="timeline-item"><span class="timeline-time">12:00</span><span class="timeline-desc">분수쇼 관람</span></div>
+<div class="timeline-item"><span class="timeline-time">12:15</span><span class="timeline-desc"><strong>점심 — 라멘 스타디움</strong> (캐널시티 5층, 하카타 돈코츠 라멘)</span></div>
+<div class="timeline-item"><span class="timeline-time">13:00</span><span class="timeline-desc">캐널시티 → 하카타역 도보 이동 (10분)</span></div>
+<div class="timeline-item"><span class="timeline-time">13:10</span><span class="timeline-desc"><strong>하카타역 마이밍</strong>에서 기념품 쇼핑</span></div>
+<div class="timeline-item"><span class="timeline-time">13:45</span><span class="timeline-desc">호텔로 돌아와서 짐 회수</span></div>
+<div class="timeline-item"><span class="timeline-time">14:00</span><span class="timeline-desc">택시로 후쿠오카 공항 국제선 이동</span></div>
+<div class="timeline-item"><span class="timeline-time">15:00</span><span class="timeline-desc"><strong>공항 도착, 체크인</strong></span></div>
+<div class="timeline-item"><span class="timeline-time">17:20</span><span class="timeline-desc">후쿠오카 출발 (TW206)</span></div>
+<div class="timeline-item"><span class="timeline-time">18:50</span><span class="timeline-desc"><strong>인천공항 도착</strong></span></div>
+
+</div>
+
+<!-- 4일차: 세부사항 -->
+<div id="day4-detail" class="sub-tab-content">
+
+<h2>아침식사 추천 (호텔 근처)</h2>
+
+<div class="callout-blue">
+  더 블러썸 하카타는 <strong>조식 미포함</strong>입니다. 호텔 뷔페(1인 &yen;2,750)도 가능하지만, 하카타역 근처에 훌륭한 아침식사 맛집이 많습니다.
+</div>
+
+<table>
+  <tr><th>추천</th><th>메뉴</th><th>위치 &amp; 시간</th><th>가격</th></tr>
+  <tr><td><strong>키스이마루 (喜水丸)</strong></td><td>해산물 정식 + 명란젓 무한리필</td><td>하카타역 지하1층 "하카타 1번가" 내<br>7:30~10:30 (아침 한정)</td><td>~&yen;1,000</td></tr>
+  <tr><td>다코멕카 (DACOMECCA)</td><td>모닝 플레이트 + 갓 구운 빵</td><td>하카타역 도보 2분<br>7:00~</td><td>&yen;550~</td></tr>
+  <tr><td>야요이켄 (やよい軒 博多祇園店)</td><td>연어구이 정식, 일본식 아침</td><td>하카타역 도보 8분<br>5:30~</td><td>~&yen;1,000</td></tr>
+</table>
+
+<div class="callout">
+  <strong>키스이마루를 가장 추천합니다.</strong><br>
+  하카타역 지하에 있어 찾기 쉽고, 후쿠오카 명물 <strong>명란젓(멘타이코)을 무한리필</strong>로 즐길 수 있습니다.<br>
+  7:30 오픈 직후에 가시면 줄 없이 바로 입장 가능합니다.<br>
+  구글맵에서 <strong>"喜水丸 博多1番街"</strong>로 검색하세요.
+</div>
+
+<h2>체크아웃 &amp; 짐 보관</h2>
 <ul>
+  <li><strong>11:00까지</strong> 체크아웃</li>
   <li>체크아웃 후 <strong>프론트에서 짐 보관 가능</strong></li>
   <li>일본어: <strong>「荷物を預かってもらえますか？」</strong> (니모츠오 아즈캇테 모라에마스카?)</li>
   <li>또는 영어: <strong>"Can I leave my luggage?"</strong></li>
 </ul>
 
+<h2>하카타 반나절 관광 코스</h2>
+
+<div class="callout-blue">
+  호텔 → 쿠시다 신사 → 캐널시티 (점심) → 하카타역 (기념품) → 호텔 짐 회수 → 공항<br>
+  <strong>모두 도보권 (총 도보 약 30분)</strong>으로, 무리 없이 돌아보는 원형 코스입니다.
+</div>
+
+<h3><span class="step-num">1</span> 쿠시다 신사 (櫛田神社) — 11:05~11:35</h3>
+<ul>
+  <li>호텔에서 <strong>도보 약 10분</strong></li>
+  <li>하카타의 수호 신사 (757년 창건), 불로장수 &amp; 상업번창의 신사</li>
+  <li>높이 13m의 <strong>하카타 기온 야마카사</strong> 장식 수레가 상시 전시</li>
+  <li>무료 입장, 약 20~30분 구경</li>
+</ul>
+<div class="map-section">
+  <strong>구글맵: 호텔 → 쿠시다 신사 (도보 10분)</strong><br>
+  <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E3%82%B6%E3%83%96%E3%83%A9%E3%83%83%E3%82%B5%E3%83%A0%E5%8D%9A%E5%A4%9A%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2&destination=%E6%AB%9B%E7%94%B0%E7%A5%9E%E7%A4%BE&travelmode=walking" target="_blank">지도 열기</a>
+</div>
+
+<h3><span class="step-num">2</span> 캐널시티 하카타 (Canal City Hakata) — 11:40~12:15</h3>
+<ul>
+  <li>쿠시다 신사에서 <strong>도보 약 5분</strong></li>
+  <li>운하가 흐르는 대형 복합쇼핑몰</li>
+  <li><strong>분수쇼</strong>: 매시 정각 &amp; 30분마다 (약 10분간) — 12:00 분수쇼 관람 추천</li>
+  <li>다이소, 돈키호테, 의류 매장 등 쇼핑 가능</li>
+</ul>
+<div class="map-section">
+  <strong>구글맵: 쿠시다 신사 → 캐널시티 (도보 5분)</strong><br>
+  <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E6%AB%9B%E7%94%B0%E7%A5%9E%E7%A4%BE&destination=%E3%82%AD%E3%83%A3%E3%83%8A%E3%83%AB%E3%82%B7%E3%83%86%E3%82%A3%E5%8D%9A%E5%A4%9A&travelmode=walking" target="_blank">지도 열기</a>
+</div>
+
+<h3><span class="step-num">3</span> 점심 식사 — 12:15~13:00</h3>
+<table>
+  <tr><th>추천</th><th>메뉴</th><th>위치</th><th>특징</th></tr>
+  <tr><td><strong>라멘 스타디움 (추천)</strong></td><td>하카타 돈코츠 라멘</td><td>캐널시티 5층</td><td>전국 유명 라멘 8개 점포, 각자 골라 먹는 재미. ~&yen;1,000</td></tr>
+  <tr><td>모츠나베 야마야</td><td>모츠나베(곱창전골)</td><td>하카타역 근처</td><td>명란젓 무한리필 + 모츠나베 점심세트 ~&yen;1,500</td></tr>
+  <tr><td>하카타 잇소우 (博多一双)</td><td>하카타 라멘</td><td>하카타역 도보 5분</td><td>"라멘계의 카푸치노" — 크리미한 돈코츠 국물</td></tr>
+</table>
+<div class="callout">
+  <strong>라멘 스타디움을 추천합니다.</strong> 캐널시티 구경 후 바로 5층으로 올라가면 되고, 각자 다른 라멘을 골라 드실 수 있어요.<br>
+  후쿠오카에 왔으니 <strong>하카타 돈코츠 라멘</strong>은 꼭 드셔보세요!
+</div>
+
+<h3><span class="step-num">4</span> 하카타역 마이밍에서 기념품 쇼핑 — 13:10~13:45</h3>
+<ul>
+  <li>캐널시티에서 <strong>하카타역 방향으로 도보 약 10분</strong></li>
+  <li><strong>마이밍 (マイング)</strong>: 하카타역 1층 쇼핑몰</li>
+  <li>후쿠오카 대표 기념과자를 한곳에서 구매 가능: <strong>히요코, 하카타도오리몬, 멘베이</strong> 등</li>
+  <li>가족, 지인 선물 사기 딱 좋은 타이밍</li>
+</ul>
+<div class="map-section">
+  <strong>구글맵: 캐널시티 → 하카타역 (도보 10분)</strong><br>
+  <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E3%82%AD%E3%83%A3%E3%83%8A%E3%83%AB%E3%82%B7%E3%83%86%E3%82%A3%E5%8D%9A%E5%A4%9A&destination=%E5%8D%9A%E5%A4%9A%E9%A7%85&travelmode=walking" target="_blank">지도 열기</a>
+</div>
+
+<h2>호텔 짐 회수 &amp; 공항 이동</h2>
+
+<ul>
+  <li><strong>13:45</strong> — 호텔로 돌아와서 짐 회수</li>
+  <li><strong>14:00~14:30</strong> — 택시 또는 버스로 후쿠오카 공항 국제선 이동</li>
+</ul>
+
 <h3>공항 가는 방법</h3>
 <table>
   <tr><th>방법</th><th>소요시간</th><th>요금</th></tr>
+  <tr><td><strong>택시 (추천)</strong></td><td>약 15-20분</td><td>약 &yen;2,000 이하 (3명이면 1인당 약 &yen;700)</td></tr>
   <tr><td><strong>버스</strong></td><td>약 15분</td><td>저렴</td></tr>
-  <tr><td>지하철+셔틀</td><td>약 20분</td><td>260엔 (국내선 경유, 환승 번거로움)</td></tr>
-  <tr><td><strong>택시 (추천)</strong></td><td>약 15-20분</td><td>약 2,000엔 이하 (3명이면 1인당 약 700엔)</td></tr>
+  <tr><td>지하철+셔틀</td><td>약 20분</td><td>&yen;260 (국내선 경유, 환승 번거로움)</td></tr>
 </table>
-
 <ul>
+  <li><strong>택시</strong>: 3명 + 짐이면 가장 편리. 호텔 프론트에서 불러달라고 하면 됨</li>
   <li><strong>버스</strong>: 하카타 버스터미널에서 <strong>후쿠오카 공항 국제선행</strong> 버스 직행</li>
-  <li><strong>택시</strong>: 3명이면 가장 편리</li>
 </ul>
 
 <div class="map-section">
@@ -451,9 +930,7 @@
   <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E3%82%B6%E3%83%96%E3%83%A9%E3%83%83%E3%82%B5%E3%83%A0%E5%8D%9A%E5%A4%9A%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2&destination=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit" target="_blank">지도 열기</a>
 </div>
 
-<!-- ===== 8. 귀국 ===== -->
-<h2>8. 후쿠오카 공항에서 귀국</h2>
-
+<h2>후쿠오카 공항에서 귀국</h2>
 <table>
   <tr><th>항목</th><th>내용</th></tr>
   <tr><td>항공사</td><td>티웨이항공 TW206, BOEING 737-800</td></tr>
@@ -469,71 +946,19 @@
   후쿠오카 공항 국제선은 인천보다 작아서 2시간 전이면 충분합니다.
 </div>
 
-<!-- ===== 전체 타임라인 ===== -->
-<h2>전체 타임라인 요약</h2>
-
-<div class="timeline-day">
-  <h3>3/3(화) - 출발일</h3>
-  <table>
-    <tr><th>시간</th><th>할 일</th></tr>
-    <tr><td>07:00</td><td>인천공항 T1 도착, F/G카운터 체크인</td></tr>
-    <tr><td>10:00</td><td>인천 출발 (TW259)</td></tr>
-    <tr><td>11:30</td><td>후쿠오카 도착, 입국심사/세관</td></tr>
-    <tr><td>12:20경</td><td>국제선 1층 밖, <strong>2번 승강장</strong>에서 대기</td></tr>
-    <tr><td>12:42</td><td>벳푸행 고속버스 출발</td></tr>
-    <tr><td>14:30경</td><td>벳푸 기타하마 도착</td></tr>
-    <tr><td>14:35경</td><td>스기노이 호텔 안내소까지 도보 이동 (5분)</td></tr>
-    <tr><td>15:00</td><td>셔틀버스 탑승</td></tr>
-    <tr><td>15:10</td><td><strong>스기노이 호텔 도착, 체크인</strong></td></tr>
-  </table>
 </div>
 
-<div class="timeline-day">
-  <h3>3/4(수) - 벳푸 자유일</h3>
-  <ul>
-    <li>온천, 호텔 시설 즐기기 (조식/석식 포함)</li>
-    <li>소라유 온천 (소라칸 최상층, 투숙객 전용)</li>
-    <li>타나유 파노라마 노천탕, 아쿠아 가든 무료 이용</li>
-  </ul>
 </div>
 
-<div class="timeline-day">
-  <h3>3/5(목) - 벳푸 → 하카타</h3>
-  <table>
-    <tr><th>시간</th><th>할 일</th></tr>
-    <tr><td>09:30경</td><td>스기노이 호텔 체크아웃</td></tr>
-    <tr><td>10:00</td><td>호텔 셔틀버스 탑승</td></tr>
-    <tr><td>10:10</td><td>벳푸역 도착, 기타하마까지 도보 5분</td></tr>
-    <tr><td>10:15 - 10:20</td><td>벳푸 기타하마 도착, 버스 대기 (약 40분 여유)</td></tr>
-    <tr><td>11:00</td><td><strong>벳푸 기타하마에서 하카타행 고속버스 출발</strong></td></tr>
-    <tr><td>13:30경</td><td>하카타 버스터미널 도착</td></tr>
-    <tr><td>13:40경</td><td>호텔까지 도보 이동 (7-10분), 프론트에 짐 맡기기</td></tr>
-    <tr><td>15:00</td><td><strong>더 블러썸 하카타 체크인</strong></td></tr>
-  </table>
-</div>
+<!-- ===== 참고정보 탭 ===== -->
+<div id="info" class="tab-content">
 
-<div class="timeline-day">
-  <h3>3/6(금) - 귀국일</h3>
-  <table>
-    <tr><th>시간</th><th>할 일</th></tr>
-    <tr><td>11:00</td><td>체크아웃, 프론트에 짐 보관</td></tr>
-    <tr><td>11:00 - 14:00</td><td>하카타 자유시간 (쇼핑, 식사 등)</td></tr>
-    <tr><td>14:00경</td><td>호텔에서 짐 회수</td></tr>
-    <tr><td>14:30경</td><td>버스/택시로 후쿠오카 공항 국제선 이동</td></tr>
-    <tr><td>15:00 - 15:20</td><td><strong>공항 도착, 체크인</strong></td></tr>
-    <tr><td>17:20</td><td>후쿠오카 출발 (TW206)</td></tr>
-    <tr><td>18:50</td><td><strong>인천공항 도착</strong></td></tr>
-  </table>
-</div>
-
-<!-- ===== 구글맵 링크 모음 ===== -->
-<h2>구글맵 링크 모음 (스마트폰에 저장해두세요!)</h2>
-
+<h2>구글맵 링크 모음</h2>
 <div class="map-section">
   <p><strong>1. 후쿠오카 공항 국제선 버스 승강장 위치</strong><br>
   <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%83%90%E3%82%B9%E4%B9%97%E3%82%8A%E5%A0%B4&travelmode=walking" target="_blank">지도 열기</a></p>
 
-  <p><strong>2. 벳푸 기타하마 → 스기노이 호텔 안내소 (셔틀버스 탑승장)</strong><br>
+  <p><strong>2. 벳푸 기타하마 → 스기노이 호텔 안내소</strong><br>
   <a class="map-link" href="https://www.google.com/maps/dir/%EB%B2%B3%ED%91%B8%ED%82%A4%ED%83%80%ED%95%98%EB%A7%88+%EC%9D%BC%EB%B3%B8+%E3%80%92874-0920+Oita,+Beppu,+Kitahama,+2-ch%C5%8Dme%E2%88%9213/%EC%8A%A4%EA%B8%B0%EB%85%B8%EC%9D%B4+%ED%98%B8%ED%85%94+%EC%95%88%EB%82%B4%EC%86%8C,+%EC%9D%BC%EB%B3%B8+%E3%80%92874-0935+Oita,+Beppu,+Ekimaecho,+12%E2%88%9213+B-Passage+%E5%86%85/@33.2802065,131.5003367,21z/data=!4m14!4m13!1m5!1m1!1s0x3546a6dc7dea5d3d:0x5bca81d13452cd6d!2m2!1d131.5065133!2d33.2797258!1m5!1m1!1s0x3546a70580a58b67:0x12e5a1dffd521956!2m2!1d131.5003714!2d33.2801461!3e2?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank">지도 열기</a></p>
 
   <p><strong>3. 하카타 버스터미널 → 더 블러썸 하카타 프리미어</strong><br>
@@ -543,9 +968,7 @@
   <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E3%82%B6%E3%83%96%E3%83%A9%E3%83%83%E3%82%B5%E3%83%A0%E5%8D%9A%E5%A4%9A%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2&destination=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit" target="_blank">지도 열기</a></p>
 </div>
 
-<!-- ===== 일본어 표현 ===== -->
 <h2>유용한 일본어 표현</h2>
-
 <table>
   <tr><th>상황</th><th>일본어</th><th>발음</th><th>뜻</th></tr>
   <tr><td>감사합니다</td><td>ありがとうございます</td><td>아리가토 고자이마스</td><td>Thank you</td></tr>
@@ -558,9 +981,7 @@
   <tr><td>도와주세요</td><td>助けてください</td><td>타스케테 쿠다사이</td><td>Please help me</td></tr>
 </table>
 
-<!-- ===== 긴급 연락처 ===== -->
 <h2>긴급 연락처</h2>
-
 <div class="emergency">
 <table>
   <tr><th>항목</th><th>연락처</th></tr>
@@ -574,15 +995,77 @@
 </table>
 </div>
 
-<hr>
-<p style="text-align:center; font-size:11px; color:#999; margin-top:16px;">
+</div>
+
+<!-- Footer -->
+<div class="footer">
   참고 출처:
   <a href="https://services.digital.go.jp/en/visit-japan-web/">Visit Japan Web</a> |
   <a href="https://m.twayair.com/app/serviceInfo/contents/130">티웨이항공</a> |
   <a href="https://www.fukuoka-airport.jp/ko/access/">후쿠오카 공항</a> |
   <a href="https://suginoi.orixhotelsandresorts.com/wsgnip/shuttlebus/">스기노이호텔 셔틀버스</a> |
   <a href="https://www.jrk-hotels.co.jp/en/Hakata_premier/">THE BLOSSOM HAKATA Premier</a>
-</p>
+</div>
+
+<!-- Font Size Control -->
+<div class="font-control">
+  <button class="font-btn" onclick="changeFontSize(-1)" aria-label="글자 작게">A-</button>
+  <span class="font-size-label" id="fontSizeLabel">100%</span>
+  <button class="font-btn" onclick="changeFontSize(1)" aria-label="글자 크게">A+</button>
+</div>
+
+<script>
+var zoomLevel = 0;
+var zoomSteps = [80, 90, 100, 115, 130, 150];
+var defaultZoomIdx = 2;
+
+(function() {
+  var saved = localStorage.getItem('travelGuideZoom');
+  if (saved !== null) {
+    zoomLevel = parseInt(saved);
+    applyZoom();
+  }
+})();
+
+function changeFontSize(dir) {
+  var newIdx = (defaultZoomIdx + zoomLevel) + dir;
+  if (newIdx < 0 || newIdx >= zoomSteps.length) return;
+  zoomLevel = newIdx - defaultZoomIdx;
+  localStorage.setItem('travelGuideZoom', zoomLevel);
+  applyZoom();
+}
+
+function applyZoom() {
+  var idx = defaultZoomIdx + zoomLevel;
+  var pct = zoomSteps[idx];
+  document.body.style.zoom = pct / 100;
+  document.getElementById('fontSizeLabel').textContent = pct + '%';
+  setTimeout(updateSpacer, 50);
+}
+
+function updateSpacer() {
+  var h = document.getElementById('fixedTop').offsetHeight;
+  document.getElementById('topSpacer').style.height = h + 'px';
+}
+updateSpacer();
+window.addEventListener('resize', updateSpacer);
+
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showSubTab(parentId, subTabId) {
+  var parent = document.getElementById(parentId);
+  parent.querySelectorAll('.sub-tab-content').forEach(function(el) { el.classList.remove('active'); });
+  parent.querySelectorAll('.sub-tab-btn').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById(subTabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
 
 </body>
 </html>
